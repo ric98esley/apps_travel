@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "843553972017",
+    "project_id": "apptripsric",
+    "storage_bucket": "apptripsric.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843553972017:android:68a97fdc9a815a01ef9a10",
+        "android_client_info": {
+          "package_name": "com.example.trips_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "843553972017-f2coomdqiq8enlpma1ft0bjse273a5v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUoS7DA21IOytTKF9oGVOlQqMQSZyoVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "843553972017-f2coomdqiq8enlpma1ft0bjse273a5v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
