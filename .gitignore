@@ -47,5 +47,5 @@ app.*.map.json
 
 # Assets
 
-/assets
-/fonts
+/assets/
+/fonts/
