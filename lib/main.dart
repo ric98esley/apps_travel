@@ -3,13 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:trips_app/Place/bloc/bloc_place.dart';
 import 'package:trips_app/User/bloc/bloc_user.dart';
 import 'package:trips_app/User/ui/screens/sign_in_screen.dart';
-import 'platzi_trips.dart';
-import 'platzi_trips_cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
 
   @override
