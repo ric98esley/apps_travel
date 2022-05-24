@@ -2,8 +2,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:trips_app/Place/bloc/bloc_place.dart';
 import 'package:trips_app/User/bloc/bloc_user.dart';
+import 'package:trips_app/User/ui/screens/sign_in_screen.dart';
 import 'platzi_trips.dart';
 import 'platzi_trips_cupertino.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        home: PlatziTripsCupertino(),
+        // home: PlatziTrips(),
+        home: SignInScreen(),
       ),
     );
   }
