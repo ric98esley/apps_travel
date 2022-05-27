@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trips_app/Place/bloc/bloc_place.dart';
+import 'package:trips_app/User/bloc/bloc_user.dart';
 
 import 'Place/ui/screens/home_trips.dart';
 import 'Place/ui/screens/search_trips.dart';
@@ -31,7 +34,10 @@ class _PlatziTrips extends State<PlatziTrips> {
     // TODO: implement build
 
     return Scaffold(
-      body: widgetsChildren[indexTap],
+      body: MultiProvider(providers: [
+        Provider<UserBloc>(create: (_) => UserBloc()),
+        Provider<PlaceBloc>(create: (_) => PlaceBloc()),
+      ], child: widgetsChildren[indexTap]),
       bottomNavigationBar: Theme(
         data: Theme.of(context)
             .copyWith(canvasColor: Colors.white, primaryColor: Colors.purple),

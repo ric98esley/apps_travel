@@ -15,7 +15,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  late UserBloc userBloc;
+  UserBloc? userBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Widget _handCurrentSession() {
     return StreamBuilder(
-        stream: userBloc.authStatus,
+        stream: userBloc!.authStatus,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           //snapshot-data- Object user
           if (!snapshot.hasData || snapshot.hasError) {
@@ -51,14 +51,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       fontFamily: "Lato",
                       color: Colors.white,
                       fontWeight: FontWeight.bold)),
-              GoogleAuthButton(
-                onPressed: () {},
-                darkMode: false,
-              ),
               ButtonGreen(
                 text: "Login With Google",
                 onPressed: () {
-                  userBloc.signIn();
+                  userBloc!.singOut()
+                  userBloc!.signIn();
                 },
                 heightP: 50.0,
                 widthP: 300.0,

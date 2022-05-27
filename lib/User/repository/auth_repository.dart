@@ -5,4 +5,6 @@ class AuthRepository {
   final _firebaseAuthAPI = FirebaseAuthAPI();
   Future<UserCredential> singInFirebase() =>
       _firebaseAuthAPI.signInWithGoogle();
+
+  signOut() => _firebaseAuthAPI.singOut();
 }
