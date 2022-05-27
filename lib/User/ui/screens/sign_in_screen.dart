@@ -54,7 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ButtonGreen(
                 text: "Login With Google",
                 onPressed: () {
-                  userBloc!.singOut()
+                  userBloc!.signOut();
                   userBloc!.signIn();
                 },
                 heightP: 50.0,
