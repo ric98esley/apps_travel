@@ -1,0 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:trips_app/User/model/user.dart';
+
+class CloudFirestoreAPI {
+  static const String USERS = "users";
+  static const String PLACE = "places";
+
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  void updateUserData(User user) async {
+    DocumentReference ref = _db.collection(USERS).doc(user.uid);
+    return ref.set({
+      'uid': user.uid,
+      'name': user.name,
+      'email': user.email,
+      'photoURL': user.photoURL,
+      'myPlaces': user.myPlaces,
+      'myFavoritePlaces': user.myFavoritePlaces,
+      'lastSignIn': DateTime.now()
+    }, SetOptions(merge: true));
+  }
+}

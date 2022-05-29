@@ -1,11 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trips_app/User/bloc/bloc_user.dart';
 import 'package:trips_app/platzi_trips.dart';
 import 'package:trips_app/widgets/button_green.dart';
+import 'package:trips_app/User/model/user.dart' as userModel;
 import 'package:trips_app/widgets/gradient_back.dart';
-import 'package:auth_buttons/auth_buttons.dart' show GoogleAuthButton;
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -55,7 +55,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 text: "Login With Google",
                 onPressed: () {
                   userBloc!.signOut();
-                  userBloc!.signIn();
+                  userBloc!.signIn().then((UserCredential? user) {
+                    userBloc!.updateUserData(userModel.User(
+                        uid: user!.user!.uid,
+                        name: user.user!.displayName,
+                        email: user.user!.email,
+                        photoURL: user.user!.photoURL));
+                  });
                 },
                 heightP: 50.0,
                 widthP: 300.0,
