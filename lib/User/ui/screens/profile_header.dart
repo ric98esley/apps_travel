@@ -32,6 +32,8 @@ class ProfileHeader extends StatelessWidget {
 
   Widget showProfileData(AsyncSnapshot snapshot) {
     if (!snapshot.hasData || snapshot.hasError) {
+      print(snapshot.hasData);
+      print(snapshot.hasError);
       print("No logeado");
       return Container(
         margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),

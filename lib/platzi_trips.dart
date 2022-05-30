@@ -20,7 +20,10 @@ class _PlatziTrips extends State<PlatziTrips> {
   final List<Widget> widgetsChildren = [
     HomeTrips(),
     SearchTrips(),
-    ProfileTrips()
+    MultiProvider(providers: [
+      Provider<UserBloc>(create: (_) => UserBloc()),
+      Provider<PlaceBloc>(create: (_) => PlaceBloc()),
+    ], child: ProfileTrips())
   ];
 
   void onTapTapped(int index) {
@@ -34,10 +37,7 @@ class _PlatziTrips extends State<PlatziTrips> {
     // TODO: implement build
 
     return Scaffold(
-      body: MultiProvider(providers: [
-        Provider<UserBloc>(create: (_) => UserBloc()),
-        Provider<PlaceBloc>(create: (_) => PlaceBloc()),
-      ], child: widgetsChildren[indexTap]),
+      body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context)
             .copyWith(canvasColor: Colors.white, primaryColor: Colors.purple),

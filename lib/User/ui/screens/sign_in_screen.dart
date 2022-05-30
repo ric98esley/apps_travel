@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trips_app/User/bloc/bloc_user.dart';
 import 'package:trips_app/platzi_trips.dart';
+import 'package:trips_app/platzi_trips_cupertino.dart';
 import 'package:trips_app/widgets/button_green.dart';
 import 'package:trips_app/User/model/user.dart' as userModel;
 import 'package:trips_app/widgets/gradient_back.dart';
@@ -16,10 +17,12 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   UserBloc? userBloc;
-
+  double? screenWidht;
   @override
   Widget build(BuildContext context) {
     userBloc = Provider.of(context);
+    screenWidht = MediaQuery.of(context).size.width;
+    print(screenWidht);
     return _handCurrentSession();
   }
 
@@ -41,16 +44,24 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          GradientBack("", 1),
+          GradientBack(
+            height: null,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Welcome \n This is your Travel App",
-                  style: TextStyle(
-                      fontSize: 37.0,
-                      fontFamily: "Lato",
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold)),
+              Container(
+                width: screenWidht! - (screenWidht! / 12),
+                child: const FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text("Welcome \n This is your Travel App",
+                      style: TextStyle(
+                          fontSize: 37.0,
+                          fontFamily: "Lato",
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ),
               ButtonGreen(
                 text: "Login With Google",
                 onPressed: () {
