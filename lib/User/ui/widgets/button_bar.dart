@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trips_app/Place/ui/screens/add_place_screen.dart';
 import 'package:trips_app/User/bloc/bloc_user.dart';
 import 'circle_button.dart';
 
@@ -18,12 +20,17 @@ class ButtonsBar extends StatelessWidget {
                 icon: Icons.vpn_key,
                 onPressed: () => {},
                 iconSize: 20.0,
-                color: Color.fromRGBO(255, 255, 255, 0.6)),
+                color: const Color.fromRGBO(255, 255, 255, 0.6)),
             CircleButton(
                 mini: false,
                 icon: Icons.add,
                 iconSize: 40.0,
-                onPressed: () => {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => AddPlaceScreen()));
+                },
                 color: Color.fromRGBO(255, 255, 255, 1)),
             CircleButton(
                 mini: true,
