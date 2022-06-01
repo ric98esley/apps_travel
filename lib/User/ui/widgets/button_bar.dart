@@ -14,7 +14,7 @@ class ButtonsBar extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
         child: Row(
-          children: <Widget>[
+          children: [
             CircleButton(
                 mini: true,
                 icon: Icons.vpn_key,
