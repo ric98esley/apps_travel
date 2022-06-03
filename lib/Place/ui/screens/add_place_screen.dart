@@ -43,21 +43,22 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             TitleHeader(title: "Add new Place"),
           ]),
           Container(
-            margin: EdgeInsets.only(top: 120.0, bottom: 20.0),
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.only(top: 90.0, bottom: 20.0),
+            width: MediaQuery.of(context).size.width,
             child: ListView(children: [
-              FittedBox(
-                fit: BoxFit.cover,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: CardImageWithFabIcon(
-                    iconData: Icons.camera_alt,
-                    onPressedFabIcon: () {},
-                    pathImage: "assets/img/sunset.jpeg",
-                  ),
+              Container(
+                alignment: Alignment.center,
+                child: CardImageWithFabIcon(
+                  left: 0,
+                  width: MediaQuery.of(context).size.width - 40.0,
+                  iconData: Icons.camera_alt,
+                  onPressedFabIcon: () {},
+                  pathImage: "assets/img/sunset.jpeg",
                 ),
               ), //foto
               Container(
-                margin: EdgeInsets.only(bottom: 20.0),
+                margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextInput(
                   hintText: "Title",
                   inputType: TextInputType.text,

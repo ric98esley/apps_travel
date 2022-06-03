@@ -16,6 +16,7 @@ class GradientBack extends StatelessWidget {
     height ??= screenHeight;
     // TODO: implement build
     return Container(
+        alignment: Alignment(-0.9, -0.6),
         width: screenWidht,
         height: height,
         decoration: const BoxDecoration(
@@ -34,15 +35,6 @@ class GradientBack extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Color.fromRGBO(0, 0, 0, 0.05),
                   borderRadius: BorderRadius.circular(screenHeight / 2)),
-            ))
-        /*Text(
-        title,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
-            fontFamily: "Lato",
-            fontWeight: FontWeight.bold),
-      ),*/
-        );
+            )));
   }
 }

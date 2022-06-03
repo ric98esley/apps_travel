@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trips_app/Place/ui/screens/header_appbar.dart';
 import 'package:trips_app/Place/ui/widgets/description_place.dart';
 import 'package:trips_app/Place/ui/widgets/review_list.dart';
+import 'package:trips_app/widgets/title_header.dart';
 
 class HomeTrips extends StatelessWidget {
   String descriptionDummy =
@@ -14,7 +15,7 @@ class HomeTrips extends StatelessWidget {
         ListView(
           children: <Widget>[
             DescriptionPlace("Bahamas", 4, descriptionDummy),
-            ReviewList()
+            ReviewList(),
           ],
         ),
         HeaderAppBar()
