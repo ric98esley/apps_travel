@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:trips_app/Place/ui/screens/add_place_screen.dart';
 import 'package:trips_app/User/bloc/bloc_user.dart';
@@ -10,6 +11,7 @@ class ButtonsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final picker = ImagePicker();
     userBloc = Provider.of(context);
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
@@ -25,11 +27,22 @@ class ButtonsBar extends StatelessWidget {
                 mini: false,
                 icon: Icons.add,
                 iconSize: 40.0,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => AddPlaceScreen()));
+                onPressed: () async {
+                  await ImagePicker()
+                      .pickImage(
+                          source: ImageSource.camera,
+                          maxHeight: 480,
+                          maxWidth: 640)
+                      .then((pickedFile) {
+                    if (pickedFile == null) {
+                      return;
+                    }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                AddPlaceScreen(image: File(pickedFile.path))));
+                  }).catchError((onError) => print(onError));
                 },
                 color: Color.fromRGBO(255, 255, 255, 1)),
             CircleButton(

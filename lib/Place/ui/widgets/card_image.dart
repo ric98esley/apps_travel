@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:trips_app/widgets/floating_action_button_green.dart';
 
@@ -26,8 +28,11 @@ class CardImageWithFabIcon extends StatelessWidget {
       width: width,
       margin: EdgeInsets.only(left: left),
       decoration: BoxDecoration(
-          image:
-              DecorationImage(fit: BoxFit.cover, image: AssetImage(pathImage)),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: pathImage.contains('assets')
+                  ? AssetImage(pathImage)
+                  : FileImage(File(pathImage)) as ImageProvider),
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           shape: BoxShape.rectangle,
           boxShadow: const <BoxShadow>[
