@@ -60,7 +60,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   width: MediaQuery.of(context).size.width - 40.0,
                   iconData: Icons.camera_alt,
                   onPressedFabIcon: () {},
-                  pathImage: widget.image!.path,
+                  pathImage: widget.image.path,
                 ),
               ), //foto
               Container(

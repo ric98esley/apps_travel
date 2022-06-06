@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trips_app/User/model/user.dart';
 
@@ -6,7 +7,6 @@ class Place {
   String name;
   String description;
   String urlImagen;
-  User? userOwner;
   int? likes;
 
   Place({
@@ -14,7 +14,6 @@ class Place {
     required this.name,
     required this.description,
     required this.urlImagen,
-    this.userOwner,
     this.id,
     this.likes,
   });
