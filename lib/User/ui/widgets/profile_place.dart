@@ -12,12 +12,28 @@ class ProfilePlace extends StatelessWidget {
     final photoCard = Container(
       margin: const EdgeInsets.only(top: 10.0, bottom: 70.0),
       height: 220.0,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover, image: NetworkImage(place.urlImagen)),
+      child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Image.network(place.urlImagen, fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                  child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded.toDouble() /
+                              loadingProgress.expectedTotalBytes!.toDouble()
+                          : null));
+            }),
+          )),
+      decoration: const BoxDecoration(
+          // image: DecorationImage(
+          //     fit: BoxFit.cover, image: NetworkImage(place.urlImagen)),
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           color: Colors.red,
-          boxShadow: const <BoxShadow>[
+          boxShadow: <BoxShadow>[
             BoxShadow(
                 color: Colors.black38,
                 blurRadius: 10.0,

@@ -7,15 +7,15 @@ import 'profile_header.dart';
 class ProfileTrips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    /*return Container(
-      color: Colors.indigo,
-    );*/
     return Stack(
       children: <Widget>[
         ProfileBackground(),
-        ListView(
-          children: <Widget>[ProfileHeader(), ProfilePlacesList()],
+        ProfileHeader(),
+        Container(
+          margin: EdgeInsets.only(top: 260),
+          child: ListView(
+            children: [ProfilePlacesList()],
+          ),
         ),
       ],
     );

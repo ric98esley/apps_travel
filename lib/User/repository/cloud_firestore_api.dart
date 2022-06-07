@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:trips_app/Place/model/place.dart';
+import 'package:trips_app/Place/ui/widgets/card_image.dart';
 import 'package:trips_app/User/model/user.dart';
 import 'package:trips_app/User/ui/widgets/profile_place.dart';
 
@@ -46,14 +48,19 @@ class CloudFirestoreAPI {
     });
   }
 
-  Stream<QuerySnapshot> placeListStream() {
+  Stream<QuerySnapshot> placeListStream({Key? key, bool? userOwner = false}) {
     auth.User? user = _auth.currentUser; //Para saber el uid del usuario actual
     DocumentReference _userRef = _db.collection(USERS).doc(user?.uid);
 
-    return _db.collection(PLACES).snapshots();
+    return userOwner == true
+        ? _db
+            .collection(PLACES)
+            .where('userOwner', isEqualTo: _userRef)
+            .snapshots()
+        : _db.collection(PLACES).snapshots();
   }
 
-  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot) {
+  List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot) {
     List<ProfilePlace> profilePlaces = List<ProfilePlace>.empty(growable: true);
     for (var p in placesListSnapshot) {
       profilePlaces.add(ProfilePlace(Place(
@@ -64,5 +71,26 @@ class CloudFirestoreAPI {
       )));
     }
     return profilePlaces;
+  }
+
+  List<CardImageWithFabIcon> buildPlaces(
+      List<DocumentSnapshot> placesListSnapshot) {
+    double heigth = 250;
+    double width = 300.0;
+    double left = 20.0;
+    IconData icon = Icons.favorite_border;
+    List<CardImageWithFabIcon> placesCard =
+        List<CardImageWithFabIcon>.empty(growable: true);
+    for (var p in placesListSnapshot) {
+      placesCard.add(CardImageWithFabIcon(
+        pathImage: p["urlImage"],
+        iconData: icon,
+        onPressedFabIcon: () {},
+        height: heigth,
+        width: width,
+        left: left,
+      ));
+    }
+    return placesCard;
   }
 }
