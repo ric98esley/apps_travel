@@ -49,9 +49,12 @@ class UserBloc implements Bloc {
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot) =>
       _cloudFirestoreRepository.buildMyPlaces(placesListSnapshot);
   // Construir Lisview en el home
-  List<CardImageWithFabIcon> buildPlaces(
-          List<DocumentSnapshot> placesListSnapshot) =>
-      _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+  List<Place> buildPlaces(
+          List<DocumentSnapshot> placesListSnapshot, userModel.User user) =>
+      _cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
+  // dar like
+  Future likePlace(Place place, String uid) async =>
+      _cloudFirestoreRepository.likePlace(place, uid);
   // Subir una foto
   final _firebaseStorageRepository = FirebaseStorageRepository();
   Future<UploadTask> uploadFile(String path, File image) async =>

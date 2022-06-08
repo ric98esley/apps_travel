@@ -73,24 +73,64 @@ class CloudFirestoreAPI {
     return profilePlaces;
   }
 
-  List<CardImageWithFabIcon> buildPlaces(
-      List<DocumentSnapshot> placesListSnapshot) {
-    double heigth = 250;
-    double width = 300.0;
-    double left = 20.0;
-    IconData icon = Icons.favorite_border;
-    List<CardImageWithFabIcon> placesCard =
-        List<CardImageWithFabIcon>.empty(growable: true);
+  List<Place> buildPlaces(
+      List<DocumentSnapshot> placesListSnapshot, User user) {
+    List<Place> places = [];
+
     for (var p in placesListSnapshot) {
-      placesCard.add(CardImageWithFabIcon(
-        pathImage: p["urlImage"],
-        iconData: icon,
-        onPressedFabIcon: () {},
-        height: heigth,
-        width: width,
-        left: left,
-      ));
+      Place place = Place(
+          id: p.id,
+          name: p["name"],
+          description: p["description"],
+          urlImagen: p["urlImage"],
+          likes: p["likes"]);
+      List usersLikedRefs = p["usersLiked"];
+      place.liked = false;
+      usersLikedRefs?.forEach((drUL) {
+        if (user.uid == drUL.id) {
+          place.liked = true;
+        }
+      });
+      places.add(place);
     }
-    return placesCard;
+    return places;
+
+    // double heigth = 250;
+    // double width = 300.0;
+    // double left = 20.0;
+    // IconData icon = Icons.favorite_border;
+    // List<CardImageWithFabIcon> placesCard =
+    //     List<CardImageWithFabIcon>.empty(growable: true);
+    // for (var p in placesListSnapshot) {
+    //   placesCard.add(CardImageWithFabIcon(
+    //     pathImage: p["urlImage"],
+    //     iconData: icon,
+    //     onPressedFabIcon: () {
+    //       //like
+    //       likePlace(,p.id);
+    //     },
+    //     height: heigth,
+    //     width: width,
+    //     left: left,
+    //   ));
+    // }
+    // return placesCard;
+  }
+
+  Future likePlace(Place place, String uid) async {
+    _db.runTransaction((transaction) async {
+      DocumentSnapshot placesDS =
+          await _db.collection(PLACES).doc(place.id).get();
+      await transaction.update(placesDS.reference, {
+        'likes': place.liked ? placesDS['likes'] + 1 : placesDS['likes'] - 1,
+        'usersLiked': place.liked
+            ? FieldValue.arrayUnion([_db.doc("${USERS}/${uid}")])
+            : FieldValue.arrayRemove([_db.doc("${USERS}/${uid}")])
+      });
+    });
+    // await _db.collection(PLACES).doc(idPlace).get().then((DocumentSnapshot ds) {
+    //   int likes = ds["likes"];
+    //   _db.collection(PLACES).doc(idPlace).update({'likes': likes++});
+    // });
   }
 }

@@ -10,6 +10,8 @@ class CardImageWithFabIcon extends StatelessWidget {
   final String pathImage;
   final VoidCallback onPressedFabIcon;
   final IconData iconData;
+  bool internet;
+
   CardImageWithFabIcon(
       {Key? key,
       required this.iconData,
@@ -17,12 +19,11 @@ class CardImageWithFabIcon extends StatelessWidget {
       required this.pathImage,
       this.height = 250.0,
       this.width = 300.0,
-      this.left = 20.0});
+      this.left = 20.0,
+      this.internet = true});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     final card = Container(
       height: height,
       width: width,

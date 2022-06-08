@@ -18,7 +18,10 @@ class PlatziTrips extends StatefulWidget {
 class _PlatziTrips extends State<PlatziTrips> {
   int indexTap = 0;
   final List<Widget> widgetsChildren = [
-    HomeTrips(),
+    MultiProvider(providers: [
+      Provider<UserBloc>(create: (_) => UserBloc()),
+      Provider<PlaceBloc>(create: (_) => PlaceBloc()),
+    ], child: HomeTrips()),
     SearchTrips(),
     MultiProvider(providers: [
       Provider<UserBloc>(create: (_) => UserBloc()),

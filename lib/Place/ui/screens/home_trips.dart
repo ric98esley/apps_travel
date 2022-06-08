@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trips_app/Place/bloc/bloc_place.dart';
 import 'package:trips_app/Place/ui/screens/header_appbar.dart';
 import 'package:trips_app/Place/ui/widgets/description_place.dart';
 import 'package:trips_app/Place/ui/widgets/review_list.dart';
+import 'package:trips_app/User/bloc/bloc_user.dart';
 import 'package:trips_app/widgets/title_header.dart';
 
 class HomeTrips extends StatelessWidget {
@@ -18,7 +21,10 @@ class HomeTrips extends StatelessWidget {
             ReviewList(),
           ],
         ),
-        HeaderAppBar()
+        MultiProvider(providers: [
+          Provider<UserBloc>(create: (_) => UserBloc()),
+          Provider<PlaceBloc>(create: (_) => PlaceBloc()),
+        ], child: HeaderAppBar())
       ],
     );
   }

@@ -8,13 +8,14 @@ class Place {
   String description;
   String urlImagen;
   int? likes;
+  bool liked;
 
-  Place({
-    Key? key,
-    required this.name,
-    required this.description,
-    required this.urlImagen,
-    this.id,
-    this.likes,
-  });
+  Place(
+      {Key? key,
+      required this.name,
+      required this.description,
+      required this.urlImagen,
+      this.id,
+      this.likes,
+      this.liked = true});
 }
