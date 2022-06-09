@@ -84,13 +84,13 @@ class CloudFirestoreAPI {
           description: p["description"],
           urlImagen: p["urlImage"],
           likes: p["likes"]);
-      List usersLikedRefs = p["usersLiked"];
-      place.liked = false;
-      usersLikedRefs?.forEach((drUL) {
-        if (user.uid == drUL.id) {
-          place.liked = true;
-        }
-      });
+      //   List usersLikedRefs = p["usersLiked"];
+      //   place.liked = false;
+      //   usersLikedRefs.forEach((drUL) {
+      //     if (user.uid == drUL.id) {
+      //       place.liked = true;
+      //     }
+      //   });
       places.add(place);
     }
     return places;

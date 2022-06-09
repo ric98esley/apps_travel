@@ -17,7 +17,10 @@ class HomeTrips extends StatelessWidget {
       children: <Widget>[
         ListView(
           children: <Widget>[
-            DescriptionPlace("Bahamas", 4, descriptionDummy),
+            MultiProvider(providers: [
+              Provider<UserBloc>(create: (_) => UserBloc()),
+              Provider<PlaceBloc>(create: (_) => PlaceBloc()),
+            ], child: DescriptionPlace("Bahamas", 4, descriptionDummy)),
             ReviewList(),
           ],
         ),

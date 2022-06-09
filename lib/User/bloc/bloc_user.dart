@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,6 +60,11 @@ class UserBloc implements Bloc {
   final _firebaseStorageRepository = FirebaseStorageRepository();
   Future<UploadTask> uploadFile(String path, File image) async =>
       _firebaseStorageRepository.uploadFile(path, image);
+  //
+  StreamController<Place> placeSelectedStreamController =
+      StreamController<Place>();
+  Stream<Place> get placeSelectedStream => placeSelectedStreamController.stream;
+  StreamSink<Place> get placeSelectedSink => placeSelectedStreamController.sink;
 
   @override
   void dispose() {}
